@@ -8,7 +8,7 @@
 #servername="Rust"
 
 # uncomment this to enable EAC, for Linux clients this must be commented out
-#ENABLE_RUST_EAC=1
+ENABLE_RUST_EAC=1
 
 #######################
 # GENERATED MAP SUPPORT
