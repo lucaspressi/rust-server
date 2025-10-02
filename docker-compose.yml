@@ -3,7 +3,7 @@ volumes:
 
 services:
   lgsm:
-    # Limites (Rust precisa de 4G)
+    # Limites (Rust precisa de 4G+)
     cpu_count: 2
     mem_limit: 8g
 
@@ -53,6 +53,7 @@ services:
     volumes:
       - lgsm:/home/linuxgsm
       - ./mod-configs/:/home/linuxgsm/serverfiles/oxide/config/:rw
+      - ./oxide-plugins:/home/linuxgsm/serverfiles/oxide/plugins:rw   # <-- PERSISTE PLUGINS
       - ./custom-mods/:/custom-plugins/:ro
       - ./custom-maps/:/custom-maps/:rw
       - ./harmony-mods:/home/linuxgsm/serverfiles/HarmonyMods
@@ -61,10 +62,9 @@ services:
       - ./rust-environment.sh:/rust-environment.sh:ro
 
     ports:
-      - "28015:28015/udp"   # Porta de jogo
-      - "28016:28016/tcp"   # Porta RCON/WebRCON
+      - "28015:28015/udp"   # Porta do jogo
+      - "28016:28016/tcp"   # RCON/WebRCON
       - "28082:28082/udp"   # Query/Steam
-      # - "8000:8000/tcp"   # painel opcional
 
     ulimits:
       nofile:
