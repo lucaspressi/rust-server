@@ -16,9 +16,9 @@ services:
       - /bin/bash
       - -exc
       - |
-        # ================
-        # PRE-BOOT MAIN
-        # ================
+        # ================ 
+        # PRE-BOOT MAIN 
+        # ================ 
         apt-get update
         apt-get install -y dos2unix rsync sudo vim nano libgdiplus python3.8-venv lib32z1
 
@@ -33,7 +33,7 @@ services:
           sed -i "s/:$lgsm_gid:/:1000:/" /etc/group
         fi
 
-        # Garante que diretórios existem (alguns são bind mounts do host)
+        # Garante que diretórios existem
         mkdir -p \
           /home/linuxgsm \
           /home/linuxgsm/serverfiles/oxide/plugins \
@@ -43,39 +43,34 @@ services:
           /home/linuxgsm/serverfiles/HarmonyConfig \
           /utils
 
-        # Corrige ownership dos diretórios principais
+        # Corrige ownership
         chown -R linuxgsm: /home/linuxgsm || true
         chown -R linuxgsm: /custom-maps || true
         chown -R linuxgsm: /home/linuxgsm/serverfiles || true
 
-        # Cria e ativa venv do linuxgsm
+        # Cria venv do linuxgsm
         python3 -m venv /home/linuxgsm/.venv
         grep -F ".venv/bin/activate" ~linuxgsm/.bash_profile >/dev/null 2>&1 || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bash_profile
         grep -F ".venv/bin/activate" ~linuxgsm/.bashrc >/dev/null 2>&1 || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bashrc
         chown -R linuxgsm: /home/linuxgsm/.venv || true
 
-        # ------------------------------
-        # CORREÇÃO AUTOMÁTICA DE DONO
-        # (resolve 'Ownership issues found')
-        # ------------------------------
-        # Plugins e configs (inclusive arquivos trazidos do host via bind mount)
+        # Corrige perms oxide/plugins
         chown -R linuxgsm: /home/linuxgsm/serverfiles/oxide || true
         find /home/linuxgsm/serverfiles/oxide -type d -exec chmod 755 {} \; || true
         find /home/linuxgsm/serverfiles/oxide -type f -exec chmod 644 {} \; || true
 
-        # Utils (scripts custom) e harmonys
+        # Utils
         chown -R linuxgsm: /utils /home/linuxgsm/serverfiles/HarmonyMods /home/linuxgsm/serverfiles/HarmonyConfig || true
         find /utils -type f -name "*.sh" -exec dos2unix {} \; -exec chmod +x {} \; || true
 
-        # Remove script antigo e executa bootstrap do servidor
+        # Executa bootstrap
         rm -f ~linuxgsm/linuxgsm.sh
         su - linuxgsm -c "LINUX_GSM_VERSION=\"${LINUX_GSM_VERSION:-v20.4.1}\" /utils/custom-rust-server.sh"
 
     volumes:
       - lgsm:/home/linuxgsm
       - ./mod-configs/:/home/linuxgsm/serverfiles/oxide/config/:rw
-      - ./oxide-plugins:/home/linuxgsm/serverfiles/oxide/plugins:rw   # <-- PERSISTE PLUGINS
-      - ./custom-mods/:/custom-plugins/:ro
+      - ./custom-mods/:/custom-plugins/:ro     # <<< AGORA É A ÚNICA FONTE DE PLUGINS
       - ./custom-maps/:/custom-maps/:rw
       - ./harmony-mods:/home/linuxgsm/serverfiles/HarmonyMods
       - ./harmony-config:/home/linuxgsm/serverfiles/HarmonyConfig
