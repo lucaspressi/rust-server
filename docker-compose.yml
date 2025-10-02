@@ -16,37 +16,58 @@ services:
       - /bin/bash
       - -exc
       - |
-        # MAIN
+        # ================
+        # PRE-BOOT MAIN
+        # ================
         apt-get update
         apt-get install -y dos2unix rsync sudo vim nano libgdiplus python3.8-venv lib32z1
 
         # grant temporary sudo access for initial setup
-        echo 'linuxgsm  ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/lgsm
+        echo 'linuxgsm  ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/lgsm
 
-        lgsm_uid="$$(id -u linuxgsm)"
-        lgsm_gid="$$(id -g linuxgsm)"
-        if [ ! "$$lgsm_uid" = 1000 ]; then
-          sed -i "s/:$$lgsm_uid:$$lgsm_gid:/:1000:1000:/" /etc/passwd
-          sed -i "s/:$$lgsm_gid:/:1000:/" /etc/group
+        # Normaliza UID/GID do usuário linuxgsm (esperado 1000)
+        lgsm_uid="$(id -u linuxgsm)"
+        lgsm_gid="$(id -g linuxgsm)"
+        if [ ! "$lgsm_uid" = 1000 ]; then
+          sed -i "s/:$lgsm_uid:$lgsm_gid:/:1000:1000:/" /etc/passwd
+          sed -i "s/:$lgsm_gid:/:1000:/" /etc/group
         fi
 
-        if [ ! "$$(stat -c '%U' /home/linuxgsm)" = linuxgsm ]; then
-          chown -R linuxgsm: /home/linuxgsm
-        fi
-        if [ ! "$$(stat -c '%U' /custom-maps)" = linuxgsm ]; then
-          chown -R linuxgsm: /custom-maps
-        fi
+        # Garante que diretórios existem (alguns são bind mounts do host)
+        mkdir -p \
+          /home/linuxgsm \
+          /home/linuxgsm/serverfiles/oxide/plugins \
+          /home/linuxgsm/serverfiles/oxide/config \
+          /custom-maps \
+          /home/linuxgsm/serverfiles/HarmonyMods \
+          /home/linuxgsm/serverfiles/HarmonyConfig \
+          /utils
 
+        # Corrige ownership dos diretórios principais
+        chown -R linuxgsm: /home/linuxgsm || true
+        chown -R linuxgsm: /custom-maps || true
+        chown -R linuxgsm: /home/linuxgsm/serverfiles || true
+
+        # Cria e ativa venv do linuxgsm
         python3 -m venv /home/linuxgsm/.venv
-        grep -F .venv ~linuxgsm/.bash_profile || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bash_profile
-        grep -F .venv ~linuxgsm/.bashrc || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bashrc
-        if [ ! "$$(stat -c '%U' /home/linuxgsm/.venv)" = linuxgsm ]; then
-          chown -R linuxgsm: /home/linuxgsm/.venv
-        fi
+        grep -F ".venv/bin/activate" ~linuxgsm/.bash_profile >/dev/null 2>&1 || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bash_profile
+        grep -F ".venv/bin/activate" ~linuxgsm/.bashrc >/dev/null 2>&1 || echo 'source /home/linuxgsm/.venv/bin/activate' > ~linuxgsm/.bashrc
+        chown -R linuxgsm: /home/linuxgsm/.venv || true
 
-        chown linuxgsm: /home/linuxgsm /home/linuxgsm/serverfiles /home/linuxgsm/serverfiles/oxide || true
-        chown -R linuxgsm: /home/linuxgsm/serverfiles/oxide/config || true
+        # ------------------------------
+        # CORREÇÃO AUTOMÁTICA DE DONO
+        # (resolve 'Ownership issues found')
+        # ------------------------------
+        # Plugins e configs (inclusive arquivos trazidos do host via bind mount)
+        chown -R linuxgsm: /home/linuxgsm/serverfiles/oxide || true
+        find /home/linuxgsm/serverfiles/oxide -type d -exec chmod 755 {} \; || true
+        find /home/linuxgsm/serverfiles/oxide -type f -exec chmod 644 {} \; || true
 
+        # Utils (scripts custom) e harmonys
+        chown -R linuxgsm: /utils /home/linuxgsm/serverfiles/HarmonyMods /home/linuxgsm/serverfiles/HarmonyConfig || true
+        find /utils -type f -name "*.sh" -exec dos2unix {} \; -exec chmod +x {} \; || true
+
+        # Remove script antigo e executa bootstrap do servidor
         rm -f ~linuxgsm/linuxgsm.sh
         su - linuxgsm -c "LINUX_GSM_VERSION=\"${LINUX_GSM_VERSION:-v20.4.1}\" /utils/custom-rust-server.sh"
 
