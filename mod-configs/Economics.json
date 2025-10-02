@@ -1,0 +1,9 @@
+{
+  "Allow negative balance for accounts": false,
+  "Balance limit for accounts (0 to disable)": 0,
+  "Negative balance limit for accounts (0 to disable)": 0,
+  "Remove unused accounts": true,
+  "Log transactions to file": false,
+  "Starting account balance (0 or higher)": 1000,
+  "Wipe balances on new save file": false
+}

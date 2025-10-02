@@ -1,0 +1,110 @@
+{
+  "Categories": {
+    "Show items tab": true,
+    "Show kits tab": true,
+    "Show commands tab": true,
+    "Show exchange tab": true,
+    "Show transfer tab": true,
+    "Show seller tab": true
+  },
+  "Options": {
+    "Open Store Command": "s",
+    "Admin RP Command": "rp",
+    "Only show/give players skins that they are allowed to use (requires PlayerDLCAPI)": true,
+    "Log all transactions": true,
+    "Use NPC dealers only": false,
+    "Economics exchange rate (1 RP is worth this much Economics)": 1.0
+  },
+  "UI Options": {
+    "Display user playtime": true,
+    "Toast color (Normal)": {
+      "Hex": "1F6BA0",
+      "Alpha": 1.0
+    },
+    "Toast text color (Normal)": {
+      "Hex": "D5EEFF",
+      "Alpha": 1.0
+    },
+    "Toast color (Error)": {
+      "Hex": "CD412B",
+      "Alpha": 0.96
+    },
+    "Toast text color (Error)": {
+      "Hex": "F7EBE1",
+      "Alpha": 0.5
+    },
+    "Background color": {
+      "Hex": "151515",
+      "Alpha": 0.75
+    },
+    "Panel color (Primary)": {
+      "Hex": "27241D",
+      "Alpha": 0.9
+    },
+    "Panel color (Secondary)": {
+      "Hex": "504D48",
+      "Alpha": 0.2
+    },
+    "Scrollbar color (Background)": {
+      "Hex": "171717",
+      "Alpha": 1.0
+    },
+    "Scrollbar color (Handle)": {
+      "Hex": "6F6B64",
+      "Alpha": 0.25
+    },
+    "Scrollbar color (Highlight)": {
+      "Hex": "6F6B64",
+      "Alpha": 0.4
+    },
+    "Scrollbar color (Pressed)": {
+      "Hex": "383838",
+      "Alpha": 1.0
+    },
+    "Button color": {
+      "Hex": "504D48",
+      "Alpha": 0.2
+    },
+    "Button text color": {
+      "Hex": "FFFFFF",
+      "Alpha": 1.0
+    },
+    "Button color (Confirm)": {
+      "Hex": "526334",
+      "Alpha": 1.0
+    },
+    "Button text color (Confirm)": {
+      "Hex": "B6F34A",
+      "Alpha": 1.0
+    },
+    "Button color (Purchase)": {
+      "Hex": "1F6BA0",
+      "Alpha": 1.0
+    },
+    "Button text color (Purchase)": {
+      "Hex": "D5EEFF",
+      "Alpha": 1.0
+    },
+    "Button color (Reject)": {
+      "Hex": "CD412B",
+      "Alpha": 0.95
+    },
+    "Button text color (Reject)": {
+      "Hex": "F7EBE1",
+      "Alpha": 0.5
+    },
+    "Button color (Disabled)": {
+      "Hex": "504D48",
+      "Alpha": 0.2
+    },
+    "Button text color (Disabled)": {
+      "Hex": "FFFFFF",
+      "Alpha": 0.5
+    }
+  },
+  "Version": {
+    "Major": 2,
+    "Minor": 0,
+    "Patch": 0
+  }
+}

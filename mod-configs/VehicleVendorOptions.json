@@ -1,0 +1,156 @@
+{
+  "Vehicles": {
+    "Minicopter": {
+      "RequiresPermission": false,
+      "FuelAmount": 100,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 500,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 250,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "ScrapTransport": {
+      "RequiresPermission": false,
+      "FuelAmount": 100,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 800,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 400,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "AttackHelicopter": {
+      "RequiresPermission": false,
+      "FuelAmount": 100,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 1750,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 1250,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "HotAirBalloon": {
+      "RequiresPermission": false,
+      "FuelAmount": 75,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 100,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 50,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "Rowboat": {
+      "RequiresPermission": false,
+      "FuelAmount": 50,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 80,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 40,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "RHIB": {
+      "RequiresPermission": false,
+      "FuelAmount": 50,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 200,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 100,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "SoloSub": {
+      "RequiresPermission": false,
+      "FuelAmount": 50,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 125,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 50,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    },
+    "DuoSub": {
+      "RequiresPermission": false,
+      "FuelAmount": 50,
+      "DespawnProtectionSeconds": 300.0,
+      "PricesRequiringPermission": [
+        {
+          "Amount": 200,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        },
+        {
+          "Amount": 100,
+          "ItemShortName": "scrap",
+          "UseEconomics": false,
+          "UseServerRewards": false
+        }
+      ]
+    }
+  }
+}
